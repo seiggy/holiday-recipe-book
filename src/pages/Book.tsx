@@ -54,7 +54,7 @@ export default function Book() {
                 {total(r) > 0 && <span>{total(r)} min</span>}
               </p>
               {r.keywords.length > 0 && (
-                <p className="tags">{r.keywords.slice(0, 3).map((k) => <span key={k.name}>{k.name}</span>)}</p>
+                <p className="tags">{r.keywords.slice(0, 3).map((k) => <span key={k.id ?? k.label}>{k.label ?? k.name}</span>)}</p>
               )}
             </Link>
           </li>
