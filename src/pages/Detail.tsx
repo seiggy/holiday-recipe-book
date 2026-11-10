@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
-import { deleteRecipe, getRecipe, mediaUrl, type Recipe } from '../api'
+import { deleteRecipe, downloadFile, getRecipe, mediaUrl, type Recipe } from '../api'
 import { useAuth } from '../auth'
 
 export default function Detail() {
@@ -30,7 +30,7 @@ export default function Detail() {
     }
   }
 
-  if (error) return <p role="alert" className="error">{error}</p>
+  if (error && !r) return <p role="alert" className="error">{error}</p>
   if (!r) return <p className="muted" role="status">Turning the page…</p>
 
   const image = mediaUrl(r.image)
@@ -46,6 +46,7 @@ export default function Detail() {
         </div>
       </div>
       {warning && <p role="alert" className="error">{warning}</p>}
+      {error && <p role="alert" className="error">{error}</p>}
       <h1>{r.name}</h1>
       {r.description && <p className="lede">{r.description}</p>}
       <p className="meta">
@@ -79,7 +80,9 @@ export default function Detail() {
           <h3>Attachments</h3>
           <ul className="ingredients">
             {files.map((f) => (
-              <li key={f!.id}><a href={mediaUrl(f!.file_download) ?? '#'} target="_blank" rel="noreferrer">{f!.name}</a></li>
+              <li key={f!.id}>
+                <button type="button" className="link dl" onClick={() => downloadFile(token!, f!).catch((e) => setError(e.message))}>{f!.name}</button>
+              </li>
             ))}
           </ul>
         </section>

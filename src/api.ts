@@ -120,8 +120,26 @@ export const updateRecipe = (token: string, existing: Recipe, r: NewRecipe) =>
 // file === null removes the current image
 export function setRecipeImage(token: string, id: number, file: File | null) {
   const form = new FormData()
-  form.append('image', file ?? '')
+  if (file) form.append('image', file)
+  else form.append('image_url', '')
   return request<{ image: string | null }>(`/api/recipe/${id}/image/`, token, { method: 'PUT', body: form })
+}
+
+// The download endpoint needs the Bearer header, so a plain link won't work.
+export async function downloadFile(token: string, f: StepFile) {
+  let res: Response
+  try {
+    res = await fetch(`/api/download-file/${f.id}/`, { headers: { Authorization: `Bearer ${token}` } })
+  } catch {
+    throw new ApiError(0, 'Could not reach the recipe server. Check your connection.')
+  }
+  if (!res.ok) throw new ApiError(res.status, res.status === 403 ? 'You don’t have permission to download that file.' : 'The file could not be downloaded.')
+  const url = URL.createObjectURL(await res.blob())
+  const a = document.createElement('a')
+  a.href = url
+  a.download = `${f.name}.zip`
+  a.click()
+  URL.revokeObjectURL(url)
 }
 
 export function uploadUserFile(token: string, file: File) {
