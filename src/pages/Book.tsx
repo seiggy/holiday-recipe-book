@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { listRecipes, type RecipeSummary } from '../api'
+import { listRecipes, mediaUrl, type RecipeSummary } from '../api'
 import { useAuth } from '../auth'
 
 const total = (r: RecipeSummary) => r.working_time + r.waiting_time
@@ -45,7 +45,7 @@ export default function Book() {
           <li key={r.id} className={i % 2 ? 'page right' : 'page left'}>
             <Link to={`/recipe/${r.id}`}>
               {r.image
-                ? <img src={r.image} alt="" loading="lazy" />
+                ? <img src={mediaUrl(r.image) ?? ''} alt="" loading="lazy" />
                 : <div className="ph" aria-hidden="true">✦</div>}
               <h2>{r.name}</h2>
               {r.description && <p className="desc">{r.description}</p>}

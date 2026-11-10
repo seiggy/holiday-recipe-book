@@ -25,6 +25,7 @@ function Shell() {
           <Route path="/" element={<Book />} />
           <Route path="/recipe/:id" element={<Detail />} />
           <Route path="/submit" element={<Submit />} />
+          <Route path="/recipe/:id/edit" element={<Submit />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </main>
