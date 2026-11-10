@@ -24,3 +24,15 @@ location /       { root /srv/app/dist; try_files $uri /index.html; }
 ```
 
 Alternatively, enable CORS on the Tandoor server for the app origin.
+
+## Container
+
+A GitHub Actions workflow (`.github/workflows/container.yml`) builds the image on every push and PR, and pushes it to `ghcr.io/seiggy/holiday-recipe-book` on `main` (`latest`, `sha-…`) and `v*.*.*` tags (semver) using `GITHUB_TOKEN`.
+
+```
+docker run -p 8080:80 -e TANDOOR_URL=https://oge-recipes.seiggy.com ghcr.io/seiggy/holiday-recipe-book:latest
+```
+
+The nginx in the image serves the app and proxies `/api` and `/media` to `TANDOOR_URL` (default `https://oge-recipes.seiggy.com`). Build locally with `docker build -t holiday-recipe-book .`.
+
+The npm registry comes from `.npmrc` (the Microsoft CFS feed). If a build environment can't reach it, set the repository variable `NPM_REGISTRY` (or pass `--build-arg NPM_REGISTRY=<url>`) to a reachable registry.
