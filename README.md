@@ -1,4 +1,4 @@
-# The Gathering Table
+# OG&E Team Recipe Book
 
 A holiday recipe book for fall and winter gatherings, built on a [Tandoor](https://tandoor.dev) instance. Sign in with your Tandoor API token, browse recipes in a book view, read details, and share new recipes.
 

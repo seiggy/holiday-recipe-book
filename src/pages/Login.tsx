@@ -24,9 +24,10 @@ export default function Login() {
     <div className="login">
       <Lights />
       <main id="main" className="login-card">
+        <div className="logo-card"><img src="/assets/oge_logo.png" alt="Americas Enterprise, US Oil, Gas & Energy" /></div>
         <p className="eyebrow">Fall &amp; winter gatherings</p>
-        <h1>The Gathering Table</h1>
-        <p className="lede">A shared book of the dishes that bring us together, from harvest suppers to midwinter feasts. Paste your access token to open it.</p>
+        <h1>OG&amp;E Team Recipe Book</h1>
+        <p className="lede">A shared book of the dishes that bring our team together, from harvest suppers to midwinter feasts. Paste your access token to open it.</p>
         <form onSubmit={submit}>
           <label htmlFor="token">Your access token</label>
           <input id="token" type="password" autoComplete="off" spellCheck={false} required

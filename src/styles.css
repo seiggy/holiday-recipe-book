@@ -1,14 +1,15 @@
 :root {
-  --night: oklch(24% 0.05 285);
-  --night-2: oklch(30% 0.06 285);
-  --paper: oklch(96% 0.02 85);
-  --paper-2: oklch(92% 0.035 80);
-  --ink: oklch(26% 0.04 300);
-  --ink-soft: oklch(42% 0.04 300);
+  --night: oklch(24% 0.05 265);
+  --night-2: oklch(30% 0.06 265);
+  --paper: oklch(97% 0.015 85);
+  --paper-2: oklch(93% 0.03 70);
+  --ink: oklch(26% 0.04 270);
+  --ink-soft: oklch(42% 0.04 270);
   --amber: oklch(80% 0.15 80);
-  --spice: oklch(52% 0.15 40);
-  --spice-dark: oklch(44% 0.14 38);
-  --sage: oklch(55% 0.06 150);
+  --coral: oklch(68% 0.17 22);
+  --spice: oklch(52% 0.15 35);
+  --spice-dark: oklch(46% 0.15 28);
+  --sage: oklch(48% 0.07 205);
   --berry: oklch(48% 0.16 15);
   --display: 'Young Serif', Georgia, serif;
   --body: 'Figtree', system-ui, sans-serif;
@@ -42,13 +43,16 @@ a { color: inherit; }
   background: var(--amber); box-shadow: 0 0 14px 3px color-mix(in oklch, var(--amber) 70%, transparent);
   animation: glow 3.2s ease-in-out infinite; animation-delay: calc(var(--i) * -0.4s);
 }
-.lights span:nth-child(3n) { background: oklch(72% 0.14 40); box-shadow: 0 0 14px 3px oklch(72% 0.14 40 / .6); }
-.lights span:nth-child(3n+1) { background: oklch(78% 0.1 160); box-shadow: 0 0 14px 3px oklch(78% 0.1 160 / .5); }
+.lights span:nth-child(3n) { background: var(--coral); box-shadow: 0 0 14px 3px oklch(68% 0.17 22 / .6); }
+.lights span:nth-child(3n+1) { background: oklch(78% 0.1 205); box-shadow: 0 0 14px 3px oklch(78% 0.1 205 / .5); }
 @keyframes glow { 50% { opacity: .45; } }
 @media (prefers-reduced-motion: reduce) { .lights span { animation: none; } }
 
 .top { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: baseline; padding: 1rem clamp(1rem, 4vw, 3rem); }
-.brand { font-size: 1.5rem; text-decoration: none; color: var(--amber); }
+.brand { display: inline-flex; align-items: center; background: var(--paper); border-radius: 999px; padding: .35rem 1.1rem .35rem .5rem; text-decoration: none; box-shadow: 0 2px 14px oklch(10% 0.05 265 / .45); }
+.brand img { height: 40px; width: auto; display: block; }
+.logo-card { display: inline-block; background: var(--paper); border-radius: 16px; padding: .8rem 1.2rem; margin-bottom: 1.5rem; box-shadow: 0 6px 24px oklch(10% 0.05 265 / .45); }
+.logo-card img { height: 72px; width: auto; display: block; }
 nav { display: flex; gap: 1.5rem; align-items: baseline; }
 nav a { text-decoration: none; padding: .25rem 0; border-bottom: 2px solid transparent; }
 nav a.active, nav a:hover { border-color: var(--amber); }
